@@ -55,3 +55,43 @@ JOIN tables t ON o.table_id = t.table_id
 JOIN menu_items mi ON o.item_id = mi.item_id
 WHERE o.status IN ('New', 'Pending')
 ORDER BY o.created_at;
+
+-- Максимальна та мінімальна кількість місць за столиком
+SELECT MIN(seats) as min_seats, MAX(seats) as max_seats FROM tables;
+
+-- Максимальна та мінімальна сума рахунку
+SELECT MIN(total_amount) as min_bill, MAX(total_amount) as max_bill FROM bills;
+
+-- Середня кількість замовлень на столик
+SELECT t.table_id, t.seats,
+       COUNT(o.order_id) as total_orders,
+       ROUND(COUNT(o.order_id)::decimal / 
+             (SELECT COUNT(DISTINCT DATE(created_at)) FROM orders WHERE table_id = t.table_id), 2) 
+       as avg_orders_per_day
+FROM tables t
+LEFT JOIN orders o ON t.table_id = o.table_id
+GROUP BY t.table_id, t.seats
+ORDER BY avg_orders_per_day DESC;
+
+-- Кількість замовлень у кожному статусі
+SELECT status, COUNT(*) as orders_count 
+FROM orders 
+GROUP BY status;
+
+-- Кількість бронювань на майбутні дати
+SELECT COUNT(*) as future_reservations 
+FROM reservations 
+WHERE reservation_time > CURRENT_TIMESTAMP;
+
+-- Загальна сума всіх оплачених рахунків
+SELECT SUM(total_amount) as total_revenue 
+FROM bills 
+WHERE status = 'Paid';
+
+-- Загальна сума продажів по місяцях
+SELECT DATE_TRUNC('month', created_at) as month,
+       SUM(total_amount) as monthly_revenue
+FROM bills
+WHERE status = 'Paid'
+GROUP BY DATE_TRUNC('month', created_at)
+ORDER BY month;
