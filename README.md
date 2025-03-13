@@ -1,9 +1,13 @@
 
-# ЛАБОРАТОРНА 2 З ДИСЦИПЛІНИ БАЗИ ДАНИХ ТА ІНФОРМАЦІЙНІ СИСТЕМИ
+# ЛАБОРАТОРНА 4 З ДИСЦИПЛІНИ БАЗИ ДАНИХ ТА ІНФОРМАЦІЙНІ СИСТЕМИ
 
 # Варіант 8. Система управління замовленнями у кафе.
 
-База даних для системи управління замовленнями у кафе реалізована в PostgreSQL з використанням умовних операторів для безпечного створення:
+Створимо бекап бази даних з попередньої роботи, з якого створимо нову базу даних для виконання цієї:
+
+```pg_dump -U postgres cafe > cafe_dump.sql```
+```psql -U postgres -c 'CREATE DATABASE cafe_restored;'```
+```psql -U postgres -d cafe_restored < cafe_dump.sql```
 
 - `SELECT 'CREATE DATABASE cafe;' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'cafe')\gexec` - перевіряє наявність бази даних перед створенням
 - `CREATE TABLE IF NOT EXISTS` - створює таблиці, лише якщо вони ще не існують
