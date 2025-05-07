@@ -1,11 +1,7 @@
 
-# ЛАБОРАТОРНА 7 З ДИСЦИПЛІНИ БАЗИ ДАНИХ ТА ІНФОРМАЦІЙНІ СИСТЕМИ
-
-## Перевірка впливу індексу на пошук:
-
-```performance_tests.ipynb```
+# ЛАБОРАТОРНА 8 З ДИСЦИПЛІНИ БАЗИ ДАНИХ ТА ІНФОРМАЦІЙНІ СИСТЕМИ
 
 ## Звіт
-[Посилання на звіт](https://drive.google.com/file/d/1EIBApTsSlsFEkjAKjVt34K_p9IXms3oK/view?usp=sharing)
+[Посилання на звіт](https://drive.google.com/file/d/1DEKH6BojcQeIsedHoh2jaV0htyXpmCP8/view?usp=sharing)
 
 
